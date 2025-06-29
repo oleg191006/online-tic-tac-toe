@@ -21,8 +21,6 @@ export const signUpAction = async (
   state: SignUnFormState,
   formData: FormData,
 ): Promise<SignUnFormState> => {
-  console.log(formData);
-
   const data = Object.fromEntries(formData.entries());
 
   const result = formDataSchema.safeParse(data);
