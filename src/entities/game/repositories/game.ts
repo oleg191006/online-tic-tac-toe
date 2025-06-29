@@ -50,6 +50,7 @@ function dbGameToGameEntity(
       return {
         id: game.id,
         creator: creator,
+        field: fieldSchema.parse(game.field),
         status: game.status,
       } satisfies GameIdleEntity;
     }

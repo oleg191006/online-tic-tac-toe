@@ -12,7 +12,7 @@ export default async function PrivateLayout({
     return;
   }
   return (
-    <div>
+    <div className="flex flex-col grow">
       <header className="px-10 py-4 flex flex-row gap-4 justify-between border-b border-b-primary/50">
         <div className="text-xl">Tic-tac-toe-online</div>
         <div className="flex items-center justify-between">
