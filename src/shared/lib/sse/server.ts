@@ -5,19 +5,13 @@ export const sseStream = (req: NextRequest) => {
   const writer = responseStream.writable.getWriter();
   const encoder = new TextEncoder();
 
-  const write = (data: unknown) => {
+  const write = (data: unknown) =>
     writer.write(encoder.encode(`data: ${JSON.stringify(data)}\n\n`));
-  };
 
-  const handleClose = (onDisconnect: () => void) => {
-    req.signal.addEventListener("abort", () => {
-      onDisconnect();
+  const addCloseListener = (onDisconnet: () => void) =>
+    void req.signal.addEventListener("abort", () => {
+      onDisconnet();
     });
-  };
-
-  const close = () => {
-    writer.close();
-  };
 
   const response = new Response(responseStream.readable, {
     headers: {
@@ -27,10 +21,14 @@ export const sseStream = (req: NextRequest) => {
     },
   });
 
+  const close = () => {
+    writer.close();
+  };
+
   return {
     response,
     write,
     close,
-    handleClose,
+    addCloseListener,
   };
 };
