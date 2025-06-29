@@ -1,1 +1,2 @@
-export * as GameDomain from "./domain";
+import * as GameDomain from "./domain";
+export { GameDomain };
